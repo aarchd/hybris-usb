@@ -1,0 +1,16 @@
+[Unit]
+Description=Hybris USB Setup
+Before=network-pre.target
+Wants=local-fs.target
+After=local-fs.target
+ConditionPathExists=|/sys/class/android_usb/android0
+ConditionPathExists=|/sys/kernel/config/usb_gadget
+
+[Service]
+Type=notify
+ExecStart=/usr/bin/usb-tethering
+Restart=on-failure
+NotifyAccess=all
+
+[Install]
+WantedBy=network-pre.target
